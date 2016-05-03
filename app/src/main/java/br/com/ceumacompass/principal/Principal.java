@@ -3,19 +3,22 @@ package br.com.ceumacompass.principal;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
 import android.net.wifi.WifiManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import br.com.ceumacompass.asynctask.*;
-
-import java.util.ArrayList;
-
 import br.com.ceumacompass.R;
-import br.com.ceumacompass.scanner.WifiScaner;
+import br.com.ceumacompass.scanner.WifiScanner;
+import br.com.ceumacompass.scrollableimageview.RolarImagem;
 
 public class Principal extends AppCompatActivity implements View.OnClickListener {
 
@@ -27,6 +30,9 @@ public class Principal extends AppCompatActivity implements View.OnClickListener
     BroadcastReceiver receiver;
     public TextView text, destino;
     private Button btn;
+    Spinner n;
+    BitmapLoaderTask carregarImagem;
+
 
     /**
      * FIM DAS DECLARAÇÕES DE VARIÁVEIS
@@ -42,7 +48,9 @@ public class Principal extends AppCompatActivity implements View.OnClickListener
         text = (TextView) findViewById(R.id.text);
         btn = (Button) findViewById(R.id.btn);
         destino = (TextView) findViewById(R.id.destino);
-
+        n = (Spinner)findViewById(R.id.spinner);
+        carregarImagem = new BitmapLoaderTask(this);
+        carregarImagem.execute("MAPA.png");
         /**
          * FIM DA RECUPERAÇÃO DE COMPONENTES
          */
@@ -50,7 +58,9 @@ public class Principal extends AppCompatActivity implements View.OnClickListener
         /**
          * EVENTOS DIVERSOS EM CLICK / TOUCH
          */
+            DestinosDisponiveis d = new DestinosDisponiveis(n, this);
             btn.setOnClickListener(this);
+            d.opcoes();
         /**
          * FIM DOS EVENTOS DIVERSOS EM CLICK / TOUCH
          */
@@ -61,7 +71,7 @@ public class Principal extends AppCompatActivity implements View.OnClickListener
          * TRECHO RESPONSÁVEL POR PEGAR TODOS OS PONTOS DE WIFI DISPONÍVEIS
          */
         if (receiver == null)
-            receiver = new WifiScaner(this);
+            receiver = new WifiScanner(this);
         registerReceiver(receiver, new IntentFilter(
                 WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
         Log.d(TAG, "onCreate()");
@@ -90,6 +100,15 @@ public class Principal extends AppCompatActivity implements View.OnClickListener
             //wifi.startScan();
             TaskRefreshWIFI task = new TaskRefreshWIFI(btn, this);
             task.execute(true);
+
         }
+    }
+
+    public void setImageBitmap(Bitmap bmp){
+        ImageView imageView = new RolarImagem(this);
+        imageView.setLayoutParams(new ActionBar.LayoutParams(bmp.getWidth(), bmp.getHeight()));
+        imageView.setImageBitmap(bmp);
+        ViewGroup container = (ViewGroup) findViewById(R.id.container);
+        container.addView(imageView);
     }
 }

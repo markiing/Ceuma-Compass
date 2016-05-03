@@ -12,18 +12,21 @@
     <Button android:id="@+id/btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Atualizar Posição"
+        android:text="@string/buscar"
         android:layout_gravity="center_vertical"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"></Button>
+        android:layout_alignTop="@+id/spinner"
+        android:layout_toRightOf="@+id/spinner"
+        android:layout_alignBottom="@+id/spinner"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"></Button>
 
     <TextView android:id="@+id/text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_above="@+id/btn"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -36,12 +39,32 @@
         android:textStyle="bold"
         android:layout_centerHorizontal="true" />
 
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner"
+        android:layout_below="@+id/textView"
+        android:layout_alignRight="@+id/destino"
+        android:layout_alignEnd="@+id/destino" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/container"
+        android:layout_below="@+id/btn">
+
+    </FrameLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
         android:id="@+id/destino"
-        android:layout_centerVertical="true"
+        android:layout_gravity="center_horizontal"
         android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
