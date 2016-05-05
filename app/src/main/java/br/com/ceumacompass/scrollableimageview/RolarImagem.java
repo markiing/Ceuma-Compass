@@ -10,6 +10,8 @@ import android.view.MotionEvent;
 import android.widget.ImageView;
 import android.widget.OverScroller;
 
+import br.com.ceumacompass.principal.Principal;
+
 /**
  * Created by Marcos on 03/05/2016.
  */
@@ -22,12 +24,13 @@ public class RolarImagem extends ImageView {
     private final int       screenH;
     private int             positionX = 0;
     private int             positionY = 0;
-
-    public RolarImagem(Context context){
+    Principal p;
+    public RolarImagem(Context context, Principal p){
         super(context);
         DisplayMetrics dm = getResources().getDisplayMetrics();
         screenW = dm.widthPixels;
         screenH = dm.heightPixels;
+        this.p = p;
 
         gestureDetector = new GestureDetectorCompat(context, gestureListener);
         overScroller = new OverScroller(context);
@@ -57,7 +60,7 @@ public class RolarImagem extends ImageView {
     }
 
     private int getMaxVertical(){
-        return (Math.abs(getDrawable().getBounds().height() - screenH));
+        return (0);
     }
 
     private GestureDetector.SimpleOnGestureListener gestureListener = new GestureDetector.SimpleOnGestureListener(){
@@ -95,7 +98,6 @@ public class RolarImagem extends ImageView {
             }else if(newPositionY > getMaxVertical()){
                 dy -= (newPositionY - getMaxVertical());
             }
-
             overScroller.startScroll(positionX, positionY, dx,dy,0);
             ViewCompat.postInvalidateOnAnimation(RolarImagem.this);
             return true;

@@ -31,7 +31,7 @@ public class Principal extends AppCompatActivity implements View.OnClickListener
     public TextView text, destino;
     private Button btn;
     Spinner n;
-    BitmapLoaderTask carregarImagem;
+    BitmapLoaderTask carregarImagem, localizador;
 
 
     /**
@@ -50,7 +50,8 @@ public class Principal extends AppCompatActivity implements View.OnClickListener
         destino = (TextView) findViewById(R.id.destino);
         n = (Spinner)findViewById(R.id.spinner);
         carregarImagem = new BitmapLoaderTask(this);
-        carregarImagem.execute("MAPA.png");
+        localizador = new BitmapLoaderTask(this);
+        carregarImagem.execute("map.png");
         /**
          * FIM DA RECUPERAÇÃO DE COMPONENTES
          */
@@ -105,7 +106,7 @@ public class Principal extends AppCompatActivity implements View.OnClickListener
     }
 
     public void setImageBitmap(Bitmap bmp){
-        ImageView imageView = new RolarImagem(this);
+        ImageView imageView = new RolarImagem(this, this);
         imageView.setLayoutParams(new ActionBar.LayoutParams(bmp.getWidth(), bmp.getHeight()));
         imageView.setImageBitmap(bmp);
         ViewGroup container = (ViewGroup) findViewById(R.id.container);
