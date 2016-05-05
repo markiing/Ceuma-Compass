@@ -32,6 +32,7 @@ public class Principal extends AppCompatActivity implements View.OnClickListener
     private Button btn;
     Spinner n;
     BitmapLoaderTask carregarImagem, localizador;
+    public ImageView imgPlace,rh,ceuma1,imgUser;
 
 
     /**
@@ -49,9 +50,18 @@ public class Principal extends AppCompatActivity implements View.OnClickListener
         btn = (Button) findViewById(R.id.btn);
         destino = (TextView) findViewById(R.id.destino);
         n = (Spinner)findViewById(R.id.spinner);
-        carregarImagem = new BitmapLoaderTask(this);
-        localizador = new BitmapLoaderTask(this);
-        carregarImagem.execute("map.png");
+        imgPlace = (ImageView)findViewById(R.id.place);
+        imgUser = (ImageView)findViewById(R.id.user);
+        rh = (ImageView)findViewById(R.id.rh);
+        ceuma1 = (ImageView)findViewById(R.id.ceuma1);
+
+        ceuma1.setVisibility(View.INVISIBLE);
+        imgPlace.setVisibility(View.INVISIBLE);
+        rh.setVisibility(View.INVISIBLE);
+
+        //carregarImagem = new BitmapLoaderTask(this);
+        //localizador = new BitmapLoaderTask(this);
+        //carregarImagem.execute("map.png");
         /**
          * FIM DA RECUPERAÇÃO DE COMPONENTES
          */
@@ -105,11 +115,11 @@ public class Principal extends AppCompatActivity implements View.OnClickListener
         }
     }
 
-    public void setImageBitmap(Bitmap bmp){
+    /*public void setImageBitmap(Bitmap bmp){
         ImageView imageView = new RolarImagem(this, this);
         imageView.setLayoutParams(new ActionBar.LayoutParams(bmp.getWidth(), bmp.getHeight()));
         imageView.setImageBitmap(bmp);
         ViewGroup container = (ViewGroup) findViewById(R.id.container);
         container.addView(imageView);
-    }
+    }*/
 }

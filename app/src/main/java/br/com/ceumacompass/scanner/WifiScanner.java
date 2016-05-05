@@ -35,6 +35,8 @@ public class WifiScanner extends BroadcastReceiver {
                         //MAC DO LABORATORIO
                         if (Math.abs(result.level) <= 60 && Math.abs(result.level) >= 30) {
                             main.destino.setText("ESTÁ NA ÁREA DOS LABORATÓRIO");
+                            main.imgUser.setX(main.imgPlace.getX());
+                            main.imgUser.setY(main.imgPlace.getY());
                         } else {
                             main.destino.setText("");
                         }
@@ -45,6 +47,8 @@ public class WifiScanner extends BroadcastReceiver {
                     } else if (result.BSSID.equals("2c:5d:93:07:0c:f8")) {
                         if(Math.abs(result.level) <= 60 && Math.abs(result.level) >= 50){
                             main.destino.setText("ESTÁ NA ÁREA DE RECURSOS HUMANOS");
+                            main.imgUser.setX(main.rh.getX());
+                            main.imgUser.setY(main.rh.getY());
                         }else{
                             main.destino.setText("");
                         }
